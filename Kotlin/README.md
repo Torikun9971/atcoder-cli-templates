@@ -14,6 +14,10 @@ atcoder-cliのKotlin用テンプレート
 ```
 ./gradlew submit
 ```
+または
+```
+./gradlew s
+```
 
 ### 提出 (サンプルケースのチェックなし)
 
