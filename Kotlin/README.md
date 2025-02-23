@@ -1,6 +1,6 @@
 # atcoder-cli-template-kotlin
 
-ReaderとWriterが付属している
+ReaderとWriterが付属している  
 atcoder-cliのKotlin用テンプレート
 
 ## 使い方
