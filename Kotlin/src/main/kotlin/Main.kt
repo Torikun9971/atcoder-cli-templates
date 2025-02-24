@@ -3,54 +3,69 @@ import java.io.PrintStream
 
 fun main() {
     val reader = FastReader()
-    val writer = FastWriter()
+    val writer = StringBuilder()
 
 
 }
 
-class FastReader(private val stream: InputStream = System.`in`) {
-    private val buffer = ByteArray(1024 * 16)
+class FastReader(
+    private val stream: InputStream = System.`in`,
+    bufferSize: Int = 1024 * 16
+) {
+    private val buffer = ByteArray(bufferSize)
     private var size = 0
     private var pos = 0
-    private var isEnded = false
+    var isEOF = false
+        private set
 
-    private fun checkAndReplenishment() {
-        if (isEnded || size > pos) return
+    private inline fun replenish(): Boolean {
+        if (size > pos) return true
+        if (isEOF) return false
 
         size = stream.read(buffer, 0, buffer.size)
         pos = 0
-        if (size < 0) isEnded = true
+
+        if (size < 0) {
+            isEOF = true
+            return false
+        }
+
+        return true
     }
 
-    fun readByte(): Byte {
-        checkAndReplenishment()
+    private inline fun readByte(): Byte {
+        if (!replenish()) return -1
         return buffer[pos++]
     }
 
     fun read(): String {
-        val bytes = mutableListOf<Byte>()
+        var len = 0
+        var bytes = ByteArray(32)
 
         while (true) {
             val byte = readByte()
+            if (byte == EOF || byte == SPACE || byte == LINE_FEED) break
 
-            if (byte == SPACE || byte == LINE_FEED) break
-            bytes.add(byte)
+            if (len >= bytes.size) bytes = bytes.copyOf(len * 2)
+            bytes[len++] = byte
         }
 
-        return bytes.toByteArray().toString(Charsets.UTF_8)
+        return String(bytes, 0, len, Charsets.UTF_8)
     }
 
     fun readln(): String {
-        val bytes = mutableListOf<Byte>()
+        var len = 0
+        var bytes = ByteArray(32)
 
         while (true) {
             val byte = readByte()
+            if (byte == EOF || byte == LINE_FEED) break
 
-            if (byte == LINE_FEED) break
-            bytes.add(byte)
+            if (len >= bytes.size) bytes = bytes.copyOf(len * 2)
+            bytes[len++] = byte
         }
 
-        return bytes.toByteArray().toString(Charsets.UTF_8)
+        return String(bytes, 0, len, Charsets.UTF_8)
     }
 
     fun skip(i: Int = 1): FastReader {
@@ -90,44 +105,18 @@ class FastReader(private val stream: InputStream = System.`in`) {
     fun readBooleans(): List<Boolean> = readln().split(" ").map { it.toBoolean() }
 
     companion object {
+        private const val EOF = (-1).toByte()
         private const val SPACE = ' '.code.toByte()
         private val LINE_FEED = '\n'.code.toByte()
     }
 }
 
-class FastWriter(private val stream: PrintStream = System.out, private val capacity: Int = 1024 * 1024 * 8) {
-    private val writeText = StringBuilder()
+inline fun StringBuilder.print(stream: PrintStream = System.out) {
+    stream.print(this)
+    this.clear()
+}
 
-    fun append(any: Any? = ""): FastWriter {
-        writeText.append(any)
-        checkCapacity()
-        return this
-    }
-
-    inline fun appendYN(b: Boolean): FastWriter {
-        return if (b)
-            this.append("Yes")
-        else
-            this.append("No")
-    }
-
-    fun appendln(any: Any? = ""): FastWriter {
-        writeText.append(any).append(System.lineSeparator())
-        checkCapacity()
-        return this
-    }
-
-    fun print() {
-        stream.print(writeText)
-        writeText.clear()
-    }
-
-    fun println() {
-        stream.println(writeText)
-        writeText.clear()
-    }
-
-    private fun checkCapacity() {
-        if (writeText.length > capacity) print()
-    }
+inline fun StringBuilder.println(stream: PrintStream = System.out) {
+    stream.println(this)
+    this.clear()
 }
