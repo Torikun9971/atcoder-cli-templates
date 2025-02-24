@@ -1,5 +1,5 @@
 import java.io.InputStream
-import java.io.PrintStream
+import java.io.PrintWriter
 
 fun main() {
     val reader = FastReader()
@@ -111,12 +111,14 @@ class FastReader(
     }
 }
 
-inline fun StringBuilder.print(stream: PrintStream = System.out) {
-    stream.print(this)
+inline fun StringBuilder.print(writer: PrintWriter = PrintWriter(System.out)) {
+    writer.print(this)
+    writer.flush()
     this.clear()
 }
 
-inline fun StringBuilder.println(stream: PrintStream = System.out) {
-    stream.println(this)
+inline fun StringBuilder.println(writer: PrintWriter = PrintWriter(System.out)) {
+    writer.println(this)
+    writer.flush()
     this.clear()
 }
