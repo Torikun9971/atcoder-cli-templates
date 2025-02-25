@@ -111,13 +111,15 @@ class FastReader(
     }
 }
 
-inline fun StringBuilder.print(writer: PrintWriter = PrintWriter(System.out)) {
+val OUTPUT_WRITER = PrintWriter(System.out, false)
+
+inline fun StringBuilder.print(writer: PrintWriter = OUTPUT_WRITER) {
     writer.print(this)
     writer.flush()
     this.clear()
 }
 
-inline fun StringBuilder.println(writer: PrintWriter = PrintWriter(System.out)) {
+inline fun StringBuilder.println(writer: PrintWriter = OUTPUT_WRITER) {
     writer.println(this)
     writer.flush()
     this.clear()
