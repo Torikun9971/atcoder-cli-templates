@@ -24,7 +24,7 @@ atcoder-cliのテンプレート置き場
 `acc new {コンテストid} --template {テンプレートフォルダ名}`
 
 ※ コンテストidはコンテストページのURL末尾の部分です  
-   例: `https://atcoder.jp/contests/abc347` の場合`abc347`がコンテストidです
+   例: `https://atcoder.jp/contests/abc347`の場合`abc347`がコンテストidです
 
 ### ジャッジ方法
 それぞれのテンプレートフォルダにあるREADME.mdを参照してください
