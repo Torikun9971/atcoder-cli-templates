@@ -113,6 +113,10 @@ class FastReader(
 
 val OUTPUT_WRITER = PrintWriter(System.out, false)
 
+inline fun StringBuilder.appendYN(b: Boolean): StringBuilder {
+    return this.append(if (b) "Yes" else "No")
+}
+
 inline fun StringBuilder.print(writer: PrintWriter = OUTPUT_WRITER) {
     writer.print(this)
     writer.flush()
