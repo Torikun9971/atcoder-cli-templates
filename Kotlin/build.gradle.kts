@@ -1,4 +1,5 @@
 import org.gradle.internal.os.OperatingSystem
+import org.gradle.kotlin.dsl.register
 
 plugins {
     kotlin("jvm") version "1.8.20"
@@ -39,25 +40,30 @@ kotlin {
     jvmToolchain(17)
 }
 
-task<Exec>("sampleJudge") {
+tasks.register<Exec>("sampleJudge") {
     dependsOn("build")
 
-    commandLine(
-        "oj", "t", "-d", "tests",
+    commandLine("oj",
+        "t",
+        "-d", "tests",
         "-c", "java -jar build/libs/${project.name}-$version.jar"
     )
 }
 
-task<Exec>("forceSubmit") {
-    commandLine(accCommand, "submit", "-s", "--", "-y")
+tasks.register<Exec>("forceSubmit") {
+    commandLine(accCommand,
+        "submit",
+        "-s",
+        "--",
+        "-y"
+    )
 }
 
-task("submit") {
-    dependsOn("sampleJudge", "forceSubmit")
-
-    tasks.named("forceSubmit").configure { mustRunAfter("sampleJudge") }
+tasks.register("submit") {
+    dependsOn("sampleJudge")
+    finalizedBy("forceSubmit")
 }
 
-task("s") {
+tasks.register("s") {
     dependsOn("submit")
 }
