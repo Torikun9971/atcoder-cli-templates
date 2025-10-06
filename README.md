@@ -1,6 +1,8 @@
 # atcoder-cli-templates
 
-atcoder-cliのテンプレート置き場
+atcoder-cliのテンプレート集
+
+[Language Test 202505](https://atcoder.jp/contests/language-test-202505)で使用する場合は[こちら](https://github.com/Torikun9971/atcoder-cli-templates/tree/language-test-202505)
 
 ## 前提要件
 
