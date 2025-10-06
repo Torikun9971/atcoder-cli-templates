@@ -1,7 +1,7 @@
 import org.gradle.internal.os.OperatingSystem
 
 plugins {
-    kotlin("jvm") version "1.8.20"
+    kotlin("jvm") version "2.2.10"
 }
 
 group = ""
