@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
+
 }
 
 tasks.jar {
@@ -30,10 +30,6 @@ tasks.jar {
     )
 
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
-
-tasks.test {
-    useJUnitPlatform()
 }
 
 kotlin {
