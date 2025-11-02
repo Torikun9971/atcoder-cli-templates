@@ -1,0 +1,12 @@
+[versions]
+java = "17"
+kotlin = "2.2.10"
+
+kotlinx-collections-immutable = "0.4.0"
+
+[libraries]
+ac-library-java = { group = "atcoder-libs", name = "ac_library17" }
+kotlinx-collections-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinx-collections-immutable" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
