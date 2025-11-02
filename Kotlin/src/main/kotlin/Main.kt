@@ -18,6 +18,7 @@ class FastReader(
     var isEOF = false
         private set
 
+    @Suppress("NOTHING_TO_INLINE")
     private inline fun replenish(): Boolean {
         if (size > pos) return true
         if (isEOF) return false
@@ -33,6 +34,7 @@ class FastReader(
         return true
     }
 
+    @Suppress("NOTHING_TO_INLINE")
     private inline fun readByte(): Byte {
         if (!replenish()) return -1
         return buffer[pos++]
@@ -80,6 +82,7 @@ class FastReader(
         return this
     }
 
+    @Suppress("ControlFlowWithEmptyBody")
     fun skipln(i: Int = 1): FastReader {
         repeat(i) {
             while (readByte() != LINE_FEED) {}
@@ -113,16 +116,19 @@ class FastReader(
 
 val OUTPUT_WRITER = PrintWriter(System.out, false)
 
+@Suppress("NOTHING_TO_INLINE")
 inline fun StringBuilder.appendYN(b: Boolean): StringBuilder {
     return this.append(if (b) "Yes" else "No")
 }
 
+@Suppress("NOTHING_TO_INLINE")
 inline fun StringBuilder.print(writer: PrintWriter = OUTPUT_WRITER) {
     writer.print(this)
     writer.flush()
     this.clear()
 }
 
+@Suppress("NOTHING_TO_INLINE")
 inline fun StringBuilder.println(writer: PrintWriter = OUTPUT_WRITER) {
     writer.println(this)
     writer.flush()
