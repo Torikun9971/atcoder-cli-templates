@@ -1,6 +1,7 @@
 {
   "task":{
     "program": [
+      "gradle",
       "src/main/kotlin/Main.kt",
       "build.gradle.kts",
       "gradle.properties",
