@@ -2,7 +2,7 @@ import org.gradle.internal.os.OperatingSystem
 import org.gradle.kotlin.dsl.register
 
 plugins {
-    kotlin("jvm") version "1.8.20"
+    kotlin("jvm") version "2.2.10"
 }
 
 group = ""
