@@ -24,7 +24,7 @@ repositories {
 
 dependencies {
     optionalImplementation(libs.ac.library.java) {
-        atcoderLib("ac_library17").exists()
+        atcoderLib("ac_library23").exists()
     }
 
     implementation(libs.kotlinx.collections.immutable)
