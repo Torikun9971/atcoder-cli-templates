@@ -8,6 +8,8 @@ fun main() {
 
 }
 
+
+
 class FastReader(
     private val stream: InputStream = System.`in`,
     bufferSize: Int = 1024 * 16
@@ -91,14 +93,12 @@ class FastReader(
         return this
     }
 
-    fun readChar(): Char = read()[0]
     fun readInt(): Int = read().toInt()
     fun readLong(): Long = read().toLong()
     fun readFloat(): Float = read().toFloat()
     fun readDouble(): Double = read().toDouble()
     fun readBoolean(): Boolean = read().toBoolean()
     fun readList(): List<String> = readln().split(" ")
-    fun readChars(): List<Char> = readln().split(" ").map { it[0] }
     fun readInts(): List<Int> = readln().split(" ").map { it.toInt() }
     fun readInts(adjust: Int): List<Int> = readln().split(" ").map { it.toInt() + adjust }
     fun readLongs(): List<Long> = readln().split(" ").map { it.toLong() }
@@ -110,11 +110,11 @@ class FastReader(
     companion object {
         private const val EOF = (-1).toByte()
         private const val SPACE = ' '.code.toByte()
-        private val LINE_FEED = '\n'.code.toByte()
+        private const val LINE_FEED = '\n'.code.toByte()
     }
 }
 
-val OUTPUT_WRITER = PrintWriter(System.out, false)
+val OutputWriter = PrintWriter(System.out, false)
 
 @Suppress("NOTHING_TO_INLINE")
 inline fun StringBuilder.appendYN(b: Boolean): StringBuilder {
@@ -122,14 +122,14 @@ inline fun StringBuilder.appendYN(b: Boolean): StringBuilder {
 }
 
 @Suppress("NOTHING_TO_INLINE")
-inline fun StringBuilder.print(writer: PrintWriter = OUTPUT_WRITER) {
+inline fun StringBuilder.print(writer: PrintWriter = OutputWriter) {
     writer.print(this)
     writer.flush()
     this.clear()
 }
 
 @Suppress("NOTHING_TO_INLINE")
-inline fun StringBuilder.println(writer: PrintWriter = OUTPUT_WRITER) {
+inline fun StringBuilder.println(writer: PrintWriter = OutputWriter) {
     writer.println(this)
     writer.flush()
     this.clear()
