@@ -8,7 +8,9 @@ fun main() {
 
 }
 
-
+// =======================
+//     Reader / Writer
+// =======================
 
 class FastReader(
     private val stream: InputStream = System.`in`,
@@ -72,6 +74,31 @@ class FastReader(
         return String(bytes, 0, len, Charsets.UTF_8)
     }
 
+    fun readLong(): Long {
+        var minus = null as Boolean?
+        var res = 0L
+
+        while (true) {
+            val byte = readByte()
+            if (byte == EOF || byte == SPACE || byte == LINE_FEED) break
+
+            if (minus == null) {
+                if (byte == MINUS) {
+                    minus = true
+                    continue
+                } else {
+                    minus = false
+                }
+            }
+
+            res *= 10
+            res += byte - ZERO
+        }
+
+        if (minus == true) res = -res
+        return res
+    }
+
     fun skip(i: Int = 1): FastReader {
         repeat(i) {
             while (true) {
@@ -93,24 +120,25 @@ class FastReader(
         return this
     }
 
-    fun readInt(): Int = read().toInt()
-    fun readLong(): Long = read().toLong()
+    fun readInt(): Int = readLong().toInt()
     fun readFloat(): Float = read().toFloat()
     fun readDouble(): Double = read().toDouble()
     fun readBoolean(): Boolean = read().toBoolean()
-    fun readList(): List<String> = readln().split(" ")
-    fun readInts(): List<Int> = readln().split(" ").map { it.toInt() }
-    fun readInts(adjust: Int): List<Int> = readln().split(" ").map { it.toInt() + adjust }
-    fun readLongs(): List<Long> = readln().split(" ").map { it.toLong() }
-    fun readLongs(adjust: Long): List<Long> = readln().split(" ").map { it.toLong() + adjust }
-    fun readFloats(): List<Float> = readln().split(" ").map { it.toFloat() }
-    fun readDoubles(): List<Double> = readln().split(" ").map { it.toDouble() }
-    fun readBooleans(): List<Boolean> = readln().split(" ").map { it.toBoolean() }
+    fun readArray(n: Int): Array<String> = Array(n) { read() }
+    fun readInts(n: Int): IntArray = IntArray(n) { readInt() }
+    fun readLongs(n: Int): LongArray = LongArray(n) { readLong() }
+    fun readFloats(n: Int): FloatArray = FloatArray(n) { readFloat() }
+    fun readDoubles(n: Int): DoubleArray = DoubleArray(n) { readDouble() }
+    fun readBooleans(n: Int): BooleanArray = BooleanArray(n) { readBoolean() }
 
     companion object {
         private const val EOF = (-1).toByte()
+
         private const val SPACE = ' '.code.toByte()
         private const val LINE_FEED = '\n'.code.toByte()
+
+        private const val MINUS = '-'.code.toByte()
+        private const val ZERO = '0'.code.toByte()
     }
 }
 
