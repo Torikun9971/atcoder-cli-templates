@@ -117,7 +117,7 @@ class FastReader(
 val OutputWriter = PrintWriter(System.out, false)
 
 @Suppress("NOTHING_TO_INLINE")
-inline fun StringBuilder.appendYN(b: Boolean): StringBuilder {
+inline fun StringBuilder.appendYesNo(b: Boolean): StringBuilder {
     return this.append(if (b) "Yes" else "No")
 }
 
