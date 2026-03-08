@@ -14,13 +14,18 @@ fun main() {
 
 class FastReader(
     private val stream: InputStream = System.`in`,
-    bufferSize: Int = 1024 * 16
+    bufferSize: Int = 1024 * 256
 ) {
+    // main buffer
     private val buffer = ByteArray(bufferSize)
+
     private var size = 0
     private var pos = 0
-    var isEOF = false
-        private set
+
+    private var isEOF = false
+
+    // sub buffer
+    private var subBuffer = ByteArray(bufferSize)
 
     @Suppress("NOTHING_TO_INLINE")
     private inline fun replenish(): Boolean {
@@ -46,32 +51,30 @@ class FastReader(
 
     fun read(): String {
         var len = 0
-        var bytes = ByteArray(32)
 
         while (true) {
             val byte = readByte()
             if (byte == EOF || byte == SPACE || byte == LINE_FEED) break
 
-            if (len >= bytes.size) bytes = bytes.copyOf(len * 2)
-            bytes[len++] = byte
+            if (len >= subBuffer.size) subBuffer = subBuffer.copyOf(len shl 1)
+            subBuffer[len++] = byte
         }
 
-        return String(bytes, 0, len, Charsets.UTF_8)
+        return String(subBuffer, 0, len)
     }
 
     fun readln(): String {
         var len = 0
-        var bytes = ByteArray(32)
 
         while (true) {
             val byte = readByte()
             if (byte == EOF || byte == LINE_FEED) break
 
-            if (len >= bytes.size) bytes = bytes.copyOf(len * 2)
-            bytes[len++] = byte
+            if (len >= subBuffer.size) subBuffer = subBuffer.copyOf(len shl 1)
+            subBuffer[len++] = byte
         }
 
-        return String(bytes, 0, len, Charsets.UTF_8)
+        return String(subBuffer, 0, len)
     }
 
     fun readLong(): Long {
